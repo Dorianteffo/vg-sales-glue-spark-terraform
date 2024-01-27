@@ -23,9 +23,11 @@ DataCatalogtable_node1 = glueContext.create_dynamic_frame.from_catalog(
     transformation_ctx="DataCatalogtable_node1",
 )
 
+## spark dataframe
 df = DataCatalogtable_node1.toDF()
 
-def clean_dataframe(df) : 
+
+def clean_data(df) : 
     """change column type, drop unnecessary columns, remove null records and duplicates"""
     df = df.dropDuplicates(['Name','Year','Genre','Platform', 'Publisher'])
     
@@ -41,7 +43,7 @@ def clean_dataframe(df) :
     return df_final
     
 
-def group_dataframe(df): 
+def group_data(df): 
     """group the data by platform and genre"""
     df_group = df \
     .groupBy("Year","Platform","Genre") \
@@ -53,7 +55,7 @@ def group_dataframe(df):
     return df_group
     
 
-def create_final_dataframe(df): 
+def create_final_report(df): 
     """select the top genre in term of sales for each year and platform"""
     sales_window = Window.partitionBy("Year","Platform").orderBy(F.col("Worldwide_sales(millions)").desc())
     
@@ -64,10 +66,12 @@ def create_final_dataframe(df):
                   .orderBy("Year")
     return final_df
                   
-                  
-df_clean = clean_dataframe(df)
-df_group = group_dataframe(df_clean)
-df_final = create_final_dataframe(df_group)
+
+              
+df_clean = clean_data(df)
+df_group = group_data(df_clean)
+df_final = create_final_report(df_group)
+
 
 #from Spark dataframe to glue dynamic frame
 glue_dynamic_frame_final = DynamicFrame.fromDF(df_final, glueContext, "glue_etl_vg_sales")
