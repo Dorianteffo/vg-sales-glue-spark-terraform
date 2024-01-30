@@ -1,12 +1,11 @@
 name: cd
 
 on: 
-    push: 
-        branches: 
-            - master
-    pull_request: 
-        branches:
-            - master
+# Only trigger, when the build workflow succeeded
+    workflow_run:
+      workflows: ["ci"]
+      types:
+        - completed
 
 jobs: 
     deploy_terraform: 
