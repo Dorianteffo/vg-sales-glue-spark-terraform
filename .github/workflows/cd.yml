@@ -16,9 +16,6 @@ jobs:
         steps: 
             - name: chechout repo 
               uses: actions/checkout@v2
-            
-            - name : destroy terraform 
-              run: make infra-down
 
             - name: Init terraform
               run: make infra-init
