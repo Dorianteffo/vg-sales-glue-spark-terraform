@@ -18,8 +18,8 @@ jobs:
               uses: actions/checkout@v2
             
             - name : destroy terraform 
-              uses: make infra-down
-              
+              run: make infra-down
+
             - name: Init terraform
               run: make infra-init
 
