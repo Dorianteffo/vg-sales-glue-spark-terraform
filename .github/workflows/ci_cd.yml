@@ -1,0 +1,35 @@
+name: ci_cd
+on: 
+  push: 
+    branches: 
+      - iac_branch
+  pull_request: 
+    branches: 
+      - iac_branch
+jobs:
+  run-ci-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout repo
+        uses: actions/checkout@v2
+
+      - name: Spin up containers
+        run: make up
+
+      - name: Run CI test
+        run: make ci
+
+  deploy_terraform: 
+    runs-on: ubuntu-latest
+    env: 
+        AWS_ACCESS_KEY_ID: ${{   secrets.AWS_ACCESS_KEY_ID   }}
+        AWS_SECRET_ACCESS_KEY: ${{   secrets.AWS_SECRET_ACCESS_KEY  }}
+    steps: 
+        - name: chechout repo 
+          uses: actions/checkout@v2
+
+        - name: Init terraform
+          run: make infra-init
+
+        - name: Terraform apply 
+          run: make infra-apply 
