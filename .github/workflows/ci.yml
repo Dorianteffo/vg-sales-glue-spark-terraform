@@ -1,11 +1,11 @@
-name: ci
+name: CI
 on: 
   push: 
     branches: 
-      - master
+      - iac_branch
   pull_request: 
     branches: 
-      - master
+      - iac_branch
 jobs:
   run-ci-tests:
     runs-on: ubuntu-latest

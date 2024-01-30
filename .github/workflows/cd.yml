@@ -1,4 +1,4 @@
-name: cd
+name: CD
 
 on: 
 # Only trigger, when the build workflow succeeded
