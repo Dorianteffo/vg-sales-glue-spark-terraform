@@ -3,7 +3,7 @@ name: CD
 on: 
 # Only trigger, when the build workflow succeeded
     workflow_run:
-      workflows: [ci]
+      workflows: [CI]
       types:
         - completed
 
