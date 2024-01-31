@@ -3,6 +3,7 @@
 
 ## Tech Stack 
 - Terraform
+- Github actions (ci/cd)
 - AWS Glue Data Catalog
 - AWS Glue Crawler
 - AWS Glue ETL Job
