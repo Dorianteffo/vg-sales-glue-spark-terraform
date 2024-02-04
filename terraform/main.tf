@@ -5,6 +5,13 @@ terraform {
       version = "~> 5.0"
     }
   }
+
+  backend "s3" {
+    bucket         	   = "iac-dorian-tf-state"
+    key              	   = "state/terraform.tfstate"
+    region         	   = "eu-west-3"
+    encrypt        	   = true
+  }
 }
 
 # Configure the AWS Provider

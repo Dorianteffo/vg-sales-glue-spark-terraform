@@ -25,6 +25,8 @@ infra-init:
 infra-apply: 
 	docker compose -f docker-compose.yaml run --rm terraform -chdir=./terraform apply --auto-approve
 
+infra-down: 
+	docker compose -f docker-compose.yaml run --rm terraform -chdir=./terraform destroy --auto-approve
 
 down: 
 	docker compose down

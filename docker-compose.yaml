@@ -6,7 +6,7 @@ services:
     build: 
       context: ./glue_etl_job
     volumes: 
-      - ./glue_etl_job:/code
+      - ./glue_etl_job/:/code
 
 
   terraform: 
